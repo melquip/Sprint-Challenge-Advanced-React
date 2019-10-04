@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const useAPI = (url) => {
+export default function useAPI(url) {
 	const [data, setData] = useState([]);
 	useEffect(() => {
 		axios.get(`http://localhost:5000/api${url}`)
@@ -13,10 +13,3 @@ export const useAPI = (url) => {
 	}, [url])
 	return data;
 }
-
-export const withAPIHook = (Component, url) => {
-	return (props) => {
-		const data = useAPI(url);
-		return <Component players={data} {...props} />;
-	};
-};
